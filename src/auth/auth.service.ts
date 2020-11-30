@@ -3,7 +3,7 @@ import HttpException from '../exceptions/HttpException';
 import ServerException from '../exceptions/ServerException';
 import TokenData from '../interfaces/tokenData';
 import { UserDoc, userModel } from '../user/user.model';
-import UserDto from './user.dto';
+import UserDto from '../user/user.dto';
 
 class AuthService {
     public async register(userData: UserDto): Promise<UserDoc> {

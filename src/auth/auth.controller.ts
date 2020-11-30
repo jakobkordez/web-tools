@@ -5,7 +5,7 @@ import authMiddleware from '../middleware/auth.middleware';
 import validationMiddleware from '../middleware/validation.middleware';
 import { getPassword, UserDoc, userModel } from '../user/user.model';
 import AuthService from './auth.service';
-import UserDto from './user.dto';
+import UserDto from '../user/user.dto';
 
 class AuthController implements Controller {
     public path = '/auth';
