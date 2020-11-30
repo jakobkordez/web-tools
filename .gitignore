@@ -1,0 +1,9 @@
+# VS Code
+.vscode/
+
+# Node / TS
+node_modules/
+dist/
+
+# Enviromental variables
+.env
