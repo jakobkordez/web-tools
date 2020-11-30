@@ -2,8 +2,8 @@
 
 ## Planned projects
 
-- Url shortener
-- Image upload 
+- [X] Url shortener
+- [ ] Image upload 
 
 ## Configuration & Setup
 
