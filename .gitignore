@@ -4,6 +4,7 @@
 # Node / TS
 node_modules/
 dist/
+logs/
 
 # Enviromental variables
 .env
