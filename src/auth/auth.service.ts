@@ -22,7 +22,7 @@ class AuthService {
     }
 
     public createToken(tokenData: TokenData): String {
-        return jwt.sign(tokenData, process.env.JWT_TOKEN as string);
+        return jwt.sign(tokenData, process.env.JWT_SECRET as string);
     }
 }
 
