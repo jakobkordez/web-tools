@@ -6,6 +6,7 @@ import validationMiddleware from '../middleware/validation.middleware';
 import { getPassword, UserDoc, userModel } from '../user/user.model';
 import AuthService from './auth.service';
 import UserDto from '../user/user.dto';
+import HttpException from '../exceptions/HttpException';
 
 class AuthController implements Controller {
     public path = '/auth';
@@ -44,7 +45,7 @@ class AuthController implements Controller {
             }
         }
 
-        return res.status(400).json('Invalid login');
+        return next(new HttpException(400, 'Invalid login'));
     }
 }
 

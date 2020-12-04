@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import { createStream, Generator } from 'rotating-file-stream';
+import HttpException from './exceptions/HttpException';
 import Controller from './interfaces/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
 
@@ -39,7 +40,7 @@ class App {
         });
 
         this.app.use(morgan('common', { stream: logStream }));
-        this.app.use(morgan('dev', { skip: (req, res) => res.statusCode < 400 }));
+        this.app.use(morgan('dev'));
     }
 
     private connectDB() {
@@ -63,8 +64,8 @@ class App {
             this.app.use(controller.path, controller.router);
         });
 
-        this.app.all('**', (req, res) => {
-            return res.status(404).json(`${req.method} ${req.path} does not exists`);
+        this.app.all('**', (req, res, next) => {
+            return next(new HttpException(404, `${req.method} ${req.path} does not exists`));
         });
     }
 
