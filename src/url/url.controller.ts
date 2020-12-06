@@ -26,7 +26,7 @@ class UrlController implements Controller {
         const id = base64ToHex(req.params.key);
 
         const url = await urlModel.findById(id);
-        if (!url) return next(new NotFoundException('URL not found'));
+        if (!url) return this.queryCustom(req, res, next);
 
         return res.json(url);
     }
