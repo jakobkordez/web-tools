@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import NotFoundException from '../exceptions/NotFoundException';
 import Controller from '../interfaces/controller.interface';
+import UserRequest from '../interfaces/userRequest.interface';
 import authMiddleware from '../middleware/auth.middleware';
-import User from './user.interface';
 import { userModel } from './user.model';
 
 class UserController implements Controller {
@@ -29,7 +29,7 @@ class UserController implements Controller {
         res.json(await userModel.find());
     }
 
-    private getMe = async (req: any, res: Response, next: NextFunction) => {
+    private getMe = async (req: UserRequest, res: Response, next: NextFunction) => {
         res.json(req.user);
     }
 

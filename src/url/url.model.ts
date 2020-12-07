@@ -5,6 +5,11 @@ import Url from './url.interface';
 interface UrlDoc extends Document, Url { }
 
 const urlSchema: Schema = new Schema({
+    'owner': {
+        type: Schema.Types.ObjectId,
+        required: [true, 'User required'],
+        ref: 'User'
+    },
     'fullUrl': {
         type: String,
         required: [true, 'URL required'],

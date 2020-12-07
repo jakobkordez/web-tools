@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { Document, model, Schema } from 'mongoose';
 import User from './user.interface';
 
-interface UserDoc extends Document, User { }
+interface UserDoc extends Document, Omit<User, '_id'> { }
 
 const userSchema: Schema = new Schema({
     'username': {

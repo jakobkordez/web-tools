@@ -1,14 +1,14 @@
-import { RequestHandler, Request } from 'express';
+import { RequestHandler, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 import ForbiddenException from '../exceptions/ForbiddenException';
 import InvalidTokenException from '../exceptions/InvalidTokenException';
 import UnauthorizedException from '../exceptions/UnauthorizedException';
 import TokenData from '../interfaces/tokenData';
-import User from '../user/user.interface';
+import UserRequest from '../interfaces/userRequest.interface';
 import { userModel } from '../user/user.model';
 
 function authMiddleware(requireAdmin = false): RequestHandler {
-    return async (req, res, next) => {
+    return async (req: UserRequest, res: Response, next: NextFunction) => {
         const auth = req.headers.authorization;
 
         if (!auth || !/^Bearer \S+$/i.test(auth)) return next(new UnauthorizedException());
@@ -29,8 +29,7 @@ function authMiddleware(requireAdmin = false): RequestHandler {
 
         if (requireAdmin && !user.admin) return next(new ForbiddenException());
 
-        const uReq = req as (Request & { user: User });
-        uReq.user = user;
+        req.user = user;
         return next();
     };
 }
